@@ -1,0 +1,1430 @@
+@font-face {
+    font-family: "Playfair";
+    src: url("../assets/front/PlayfairDisplay-ExtraBold.ttf") format("truetype");
+}
+/* navbar */
+
+.navbar {
+    background-color: var(--bg-navbar);
+    padding: 5px 0;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar_bg {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar.scrolled {
+    backdrop-filter: blur(6px); /* làm mờ nội dung phía sau */
+    background-color: rgba(0, 50, 0, 0.8); /* mờ nhẹ nền */
+}
+.navbar_img {
+    display: flex;
+    align-items: center;
+}
+
+.navbar_img img {
+    height: 7rem;
+    width: auto;
+}
+
+.items_list {
+    display: flex;
+    list-style-type: none;
+    gap: 42px;
+    color: var(--txt-color);
+    font-size: 1.7rem;
+}
+
+.items_list a {
+    color: var(--txt-color);
+    text-decoration: none;
+}
+.underline {
+    position: relative;
+}
+
+.underline::after {
+    display: none;
+    content: "";
+    position: absolute;
+    bottom: -2px; /* Khoảng cách từ đường gạch chân đến ký tự */
+    left: 0;
+    width: 100%; /* Chiều dài gạch chân */
+    height: 2px; /* Độ dày gạch chân */
+    background-color: #a5d6a7; /* Màu gạch chân */
+}
+
+.item:hover {
+    color: #a5d6a7;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.item:hover .underline::after {
+    display: block;
+}
+
+.navbar_items_btn {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.cart_icon {
+    background: var(--cart-bg); 
+    padding: 8px 12px; 
+    position: relative; /
+}
+
+.cart_icon i {
+    font-size: 2.5rem;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.cart_icon:hover i {
+    color: #ffffff; /* Đảm bảo icon sáng khi hover */
+}
+
+/* Hiển thị số lượng sản phẩm trong giỏ hàng (nếu có) */
+.cart_icon .cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4444; /* Màu đỏ cho số lượng */
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Kiểu chung cho cả 2 nút */
+.navbar_btn {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Khoảng cách giữa span và button */
+}
+.btn {
+    padding: 10px 20px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    border-radius: 999px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+/* Nút Log In (viền xanh, chữ xanh) */
+.navbar_log_in {
+    border: 2px solid #214e33;
+    color: white;
+    background-color: #2e7d4f; /* sáng hơn khi hover */
+    border-color: #2e7d4f;
+}
+
+.navbar_log_in:hover {
+    background-color: transparent;
+    color: #a5d6a7;
+}
+
+.login_regiter_form {
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 80%;
+    z-index: 99;
+}
+
+/* Nut dang xuat */
+.welcome_user {
+    font-size: 18px;
+    font-weight: 1.6rem;
+    color: #fff; 
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+}
+
+/* Định dạng cho navbar_log_out */
+
+.navbar_log_out {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 20px; /* Bo góc giống hình ảnh */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 2px solid #214e33;
+    color: white;
+    background-color: #2e7d4f; /* sáng hơn khi hover */
+    border-color: #2e7d4f;
+}
+
+/* Hiệu ứng hover cho nút */
+.navbar_log_out:hover {
+    background-color: transparent;
+    color: #a5d6a7;
+}
+
+
+/*  */
+.wrapper {
+    position: relative;
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    user-select: none;
+    overflow: hidden;
+    transition: height 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.wrapper.active-popup {
+    transform: scale(1);
+}
+
+.wrapper.active {
+    height: 520px;
+}
+
+.form-box {
+    width: 340px;
+}
+
+.form-box.login {
+    transition: transform 0.18s ease;
+    transform: translateX(0);
+}
+
+.wrapper.active .form-box.login {
+    transition: none;
+    transform: translateX(-400px);
+}
+
+.form-box.register {
+    position: absolute;
+    transition: none;
+    transform: translateX(400px);
+}
+
+.wrapper.active .form-box.register {
+    transition: transform 0.18s ease;
+    transform: translateX(0);
+}
+.icon_close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background-color: var(--bg-navbar);
+    font-size: 2em;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.icon_close img {
+    width: 25;
+    height: 25px;
+}
+.form-box h2 {
+    font-size: 2.2em;
+    color: #162938;
+    text-align: center;
+}
+
+.input_box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid var(--bg-navbar);
+    margin: 30px 0;
+}
+
+.input_box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #162938;
+    font-weight: 500;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.input_box input:focus ~ label,
+.input_box input:not(:placeholder-shown) ~ label
+/* Nó khác với cái placehoder là ok chứ k cần phải đúng giá trị vì khi sai thì sẽ ko đẩy lên */ {
+    top: -10px;
+}
+.input_box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #162938;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.remember-forgot {
+    font-size: 0.9em;
+    color: #162938;
+    font-weight: 500;
+    margin: 15px 0 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    accent-color: #162938;
+    margin-right: 3px;
+    font-size: large;
+}
+
+.remember-forgot a {
+    color: #162938;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.btn_login,
+.btn_register {
+    width: 100%;
+    height: 45px;
+    background: var(--bg-navbar);
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+
+.login-register {
+    font-size: 0.9em;
+    color: #162938;
+    text-align: center;
+    margin: 25px 0 10px;
+}
+
+.login-register p a {
+    color: red;
+    text-decoration: none;
+    font-weight: 600;
+    padding-left: 5px;
+}
+.login-register p a:hover {
+    text-decoration: underline;
+}
+
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 16px 24px;
+  background-color: #198754; /* xanh lá thành công */
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 1000;
+}
+
+.toast.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.toast.error {
+  background-color: #dc3545; /* đỏ lỗi */
+}
+
+
+/* Nút đóng */
+.close_btn {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1000;
+    transition: 0.2s;
+}
+.close_btn:hover {
+    transform: scale(1.2);
+}
+
+/* Nút Sign Up (nền xanh đậm, chữ trắng) */
+.navbar_sign_up {
+    border: 2px solid #214e33;
+    color: white;
+    margin-left: 10px; /* cách nút Log In một chút */
+    background-color: #2e7d4f; /* sáng hơn khi hover */
+    border-color: #2e7d4f;
+    outline: none;
+}
+
+.navbar_sign_up:hover {
+    background-color: transparent;
+    color: #a5d6a7;
+}
+
+
+
+/* Hero */
+.hero_img img {
+    width: 100%;
+    height: auto;
+}
+
+.hero {
+    position: relative;
+    margin-bottom: 50px;
+    background-color: var(--bg-img-hero);
+}
+.hero_content {
+    position: absolute;
+    margin: auto;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #214e33; /* hoặc màu khác tùy ảnh nền */
+    padding: 20px;
+    max-width: 40%;
+    border-radius: 8px;
+}
+
+.hero_conten_title {
+    font-size: 3.4em;
+    margin-bottom: var(--mg-bottom24);
+    line-height: 1.2;
+}
+
+.hero_btn {
+    border: 2px solid #214e33;
+    color: white;
+    margin-left: 10px; /* cách nút Log In một chút */
+    background-color: #2e7d4f; /* sáng hơn khi hover */
+    border-color: #2e7d4f;
+    font-size: 2rem;
+}
+
+.hero_btn:hover {
+    background-color: transparent;
+    color: #214e33;
+}
+
+/* First intro */
+.first_intructions {
+    background-color: var(--bg-color);
+    padding: 64px 0 65px;
+}
+
+.first_intro_bg {
+    display: flex;
+    justify-content: space-between;
+}
+
+.first_intro_img {
+    position: relative;
+}
+
+.first_intro_food_img {
+    border-radius: 20px;
+}
+
+.first_food_img_page,
+.first_food_img_code,
+.first_food_img_megaphone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+}
+
+.first_food_intro {
+    position: absolute;
+    box-shadow: 0px 16px 32px 0px #0000000d;
+    width: 280px;
+    height: 244px;
+    top: 45%;
+    left: 75%;
+    border-radius: 12px;
+    padding: 24px 20px;
+    background-color: #d4e5b6;
+}
+
+.first_food_desc_img {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.food_desc_name {
+    color: #2c3650;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 30px;
+}
+
+.food_desc_name:hover {
+    cursor: pointer;
+}
+
+.food_desc p {
+    color: #214e33;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.content_title {
+    margin-top: 10px;
+    color: var(--txt-content);
+    font-size: 3.4rem;
+    margin-bottom: var(--mg-bottom24);
+}
+
+.highlight-name {
+    font-family: "Lobster", cursive;
+    font-size: 1.2em;
+    color: #214e33;
+    font-weight: normal; /* font này đã đủ đậm */
+    font-style: normal;
+}
+
+.content_intro_small {
+    color: var(--txt-content);
+    margin: 0 0 20px 20px;
+    font-size: 20px;
+}
+
+.criteria-list li::before {
+    content: "✔";
+    display: inline-block;
+    margin-right: 8px;
+    color: green;
+    transition: transform 0.3s;
+}
+
+/* Khi hover vào li, ::before sẽ lắc */
+.criteria-list li:hover::before {
+    animation: shake 0.5s ease;
+    cursor: pointer;
+}
+
+/* Định nghĩa hiệu ứng shake */
+@keyframes shake {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(10deg);
+    }
+    50% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(10deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Menu Section */
+
+.menu_section {
+    margin: 5em 0 5em;
+    padding: 1.5rem 1.5rem; /* Thêm padding ngang để nội dung không sát mép */
+}
+
+.menu_section_title {
+    font-size: 3.6rem;
+    padding-bottom: 20px;
+    text-align: center;
+    color: var(--bg-navbar);
+    font-weight: 700;
+}
+
+.menu_section_intro {
+    font-size: 1.8rem;
+    padding-bottom: 40px;
+    text-align: center;
+    color: var(--txt-content);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.4;
+}
+
+.menu_section_detail {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(280px, 1fr)
+    ); /* linh hoạt trên màn hình nhỏ */
+    padding: 0;
+    gap: 24px;
+    box-sizing: border-box;
+    align-items: stretch;
+}
+
+.menu_section_box {
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu_section_box:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+.menu_section_box:hover img {
+    transform: scale(1.08);
+}
+.menu_section_box img {
+    width: 100%;
+    height: 260px; /* Cố định chiều cao để ảnh đều nhau */
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.section_box_content {
+    padding: 20px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.section_box_content a {
+    font-size: 2.2rem;
+    color: #214e33;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.section_box_content a:hover {
+    color: #1e6b41;
+    cursor: pointer;
+}
+
+.section_box_content p {
+    font-size: 1.4rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+    flex-grow: 1;
+}
+
+/* FEED BACK */
+
+.feedback {
+    background-color: var(--bg-img-hero);
+    margin-bottom: 5em;
+}
+.feedback_container {
+    width: 1440px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.feedback_title {
+    font-weight: bold;
+    color: var(--bg-navbar);
+    text-align: center;
+    padding: 40px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.feedback_title h2 {
+    line-height: 1.2;
+    font-size: 3.6rem;
+}
+.feedback_title p {
+    color: var(--txt-content);
+    padding-top: 2rem;
+    font-size: 1.8rem;
+}
+.marquee-section {
+    padding: 40px 0;
+}
+
+.marquee-row {
+    display: flex;
+
+    white-space: nowrap;
+    animation: scroll 28s linear infinite;
+    width: 100%;
+}
+
+.marquee-row:nth-child(2) {
+    animation-duration: 40s;
+    animation-direction: reverse;
+}
+
+.marquee-row:nth-child(3) {
+    animation-duration: 35s;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(50%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.feedback-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    margin: 10px 20px;
+    padding: 20px;
+    min-width: 300px;
+    max-width: 300px;
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+}
+
+.feedback-card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.feedback-user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.feedback-user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    margin-right: 10px;
+    object-fit: cover;
+    display: block;
+    font-size: 12px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.stars {
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    font-size: 18px;
+    margin-right: 2px;
+}
+
+.star.filled {
+    color: #ffcc00;
+}
+
+.star.empty {
+    color: #d3d3d3;
+}
+
+.feedback-date {
+    font-size: 13px;
+    color: #666;
+    margin: 7px 0;
+}
+
+.feedback-text {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+    margin-top: 5px;
+}
+/* Footer */
+.footer {
+    padding: 25px;
+    background: var(--bg-navbar);
+}
+
+.footer1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer_label img {
+    width: 45%;
+}
+
+.footer_sublabel_intro {
+    color: #bfbcb2;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 185.714% */
+    margin-top: 18px;
+}
+
+
+.footer_label_link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    width: 28px;
+    height: 28px;
+}
+
+.social-icons a {
+    color: white; /* Màu gốc */
+    margin: 0 8px;
+    font-size: 22px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: red; /* Màu khi hover */
+}
+
+.footer_sublabel:hover {
+    text-decoration: underline;
+}
+
+.footer_label {
+    display: flex;
+    flex-direction: column;
+    width: 370px;
+}
+
+.footer_label_title {
+    color: #fff;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px; /* 175% */
+    margin-top: 2px;
+}
+
+.line_footer {
+    margin: 18px 0 28px;
+    background: #59554b;
+    width: 180px;
+    height: 2px;
+}
+.footer_sublabel {
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 26px; /* 185.714% */
+    text-decoration: none;
+    color: #bfbcb2;
+    margin-bottom: 14px;
+}
+
+
+
+.footer_label_info {
+    margin-bottom: 13px;
+    color: #bfbcb2;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+}
+
+strong {
+    font-weight: bold;
+    color: #fff;
+}
+.footer2 {
+    margin-top: 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.line_end {
+    width: 1110px;
+    height: 2px;
+    background: #59554b;
+}
+
+.footer2_end {
+    color: #807d74;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px; /* 185.714% */
+    margin-top: 28px;
+}
+
+/* Consultation Section Styles */
+.consultation_section {
+    padding-bottom: 5em;
+    position: relative;
+    overflow: hidden;
+}
+
+.consultation_section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../assets/img/avt/leaf.png') no-repeat center;
+    background-size: 150px;
+    opacity: 0.05;
+    z-index: 1;
+}
+
+.consultation_header {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.consultation_title {
+    font-size: 3.6rem;
+    padding: 40px 0 20px 0;
+    text-align: center;
+    color: var(--bg-navbar);
+    font-weight: 700;
+}
+
+.consultation_subtitle {
+    font-size: 1.8rem;
+    padding-bottom: 40px;
+    text-align: center;
+    color: var(--txt-content);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.4;
+}
+
+.consultation_process {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.process_step {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.process_step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #38a169 0%, #48bb78 100%);
+}
+
+.process_step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.step_number {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #38a169 0%, #48bb78 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 12px rgba(56, 161, 105, 0.3);
+}
+
+.step_icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.step_icon i {
+    font-size: 2.4rem;
+    color: #38a169;
+}
+
+.step_title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 12px;
+}
+
+.step_description {
+    font-size: 1.4rem;
+    color: #718096;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.step_features {
+    list-style: none;
+    padding: 0;
+}
+
+.step_features li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+    color: #4a5568;
+}
+
+.step_features i {
+    color: #38a169;
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+.consultation_cta {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.cta_content {
+    flex: 1;
+}
+
+.cta_content h3 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 12px;
+}
+
+.cta_content p {
+    font-size: 1.5rem;
+    color: #718096;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.cta_buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.btn_primary {
+    background: linear-gradient(135deg, #38a169 0%, #48bb78 100%);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(56, 161, 105, 0.3);
+}
+
+.btn_primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(56, 161, 105, 0.4);
+}
+
+.btn_secondary {
+    background: transparent;
+    color: #38a169;
+    border: 2px solid #38a169;
+    padding: 12px 26px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn_secondary:hover {
+    background: #38a169;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.cta_stats {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.stat_item {
+    text-align: center;
+    min-width: 100px;
+}
+
+.stat_number {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #38a169;
+    margin-bottom: 4px;
+}
+
+.stat_label {
+    font-size: 1.2rem;
+    color: #718096;
+    line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .consultation_section {
+        padding: 60px 0;
+    }
+    
+    .consultation_title {
+        font-size: 2.6rem;
+    }
+    
+    .consultation_subtitle {
+        font-size: 1.4rem;
+    }
+    
+    .consultation_process {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .consultation_cta {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .cta_buttons {
+        justify-content: center;
+    }
+    
+    .cta_stats {
+        justify-content: center;
+    }
+    
+    .step_title {
+        font-size: 1.8rem;
+    }
+    
+    .step_description {
+        font-size: 1.3rem;
+    }
+}
+
+/* Chef Section */
+.chef_section {
+    background: linear-gradient(135deg, #f8fffe 0%, #e8f5e8 100%);
+    padding: 80px 0;
+    margin: 60px 0;
+}
+
+.chef_header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.chef_title {
+    font-size: 3.6rem;
+    color: var(--bg-navbar);
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-family: "Playfair Display", serif;
+}
+
+.chef_subtitle {
+    font-size: 1.8rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.chef_content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.chef_about {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    background: white;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.chef_about_img {
+    flex: 1;
+    position: relative;
+}
+
+.chef_main_img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.chef_about_text {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.chef_about_text h3 {
+    font-size: 2.8rem;
+    color: var(--bg-navbar);
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.chef_about_text p {
+    font-size: 1.6rem;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.chef_skills {
+    list-style: none;
+    padding: 0;
+}
+
+.chef_skills li {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.chef_skills li:before {
+    content: "✓";
+    color: #2e7d4f;
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+/* Chef Blog Section */
+.chef_blog_section {
+    padding: 40px 0;
+    background-color: var(--bg-img-hero);
+}
+
+.chef_blog_header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.chef_blog_title {
+    font-size: 3.6rem;
+    color: var(--bg-navbar);
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-family: "Playfair Display", serif;
+}
+
+.chef_blog_subtitle {
+    font-size: 1.8rem;
+    color: #666;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.chef_blog_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.chef_blog_item {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.chef_blog_item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.chef_blog_img {
+    overflow: hidden;
+    height: 220px;
+}
+
+.chef_blog_img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.chef_blog_item:hover .chef_blog_img img {
+    transform: scale(1.05);
+}
+
+.chef_blog_content {
+    padding: 20px;
+}
+
+.chef_blog_content h4 {
+    font-size: 2.2rem;
+    color: var(--bg-navbar);
+    margin-bottom: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.chef_blog_content p {
+    font-size: 1.4rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.chef_blog_link {
+    color: #2e7d4f;
+    font-weight: 600;
+    font-size: 1.4rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.chef_blog_link:hover {
+    color: #1e5d3f;
+}
+
+/* Responsive cho Chef sections */
+@media (max-width: 768px) {
+    .chef_about {
+        flex-direction: column;
+        padding: 30px;
+        gap: 40px;
+    }
+    
+    .chef_about_text {
+        padding-left: 0;
+        text-align: center;
+    }
+    
+    .chef_title, .chef_blog_title {
+        font-size: 2.8rem;
+    }
+    
+    .chef_subtitle, .chef_blog_subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .chef_blog_grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 20px;
+    }
+    
+    .chef_section, .chef_blog_section {
+        padding: 50px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .chef_about {
+        padding: 20px;
+    }
+    
+    .chef_about_text h3 {
+        font-size: 2.2rem;
+    }
+    
+    .chef_about_text p {
+        font-size: 1.4rem;
+    }
+    
+    .chef_skills li {
+        font-size: 1.3rem;
+    }
+}

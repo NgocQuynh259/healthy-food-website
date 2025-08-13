@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    font-size: 1.7rem;
+}
+
+
+:root {
+    --btn-color:#FFB900;
+    --btn-click-color:#171100;
+    --bg-color :white;
+    --bg-navbar:#214E33;
+    --txt-color:white;
+    --mg-bottom24: 24px;
+    --txt-content:#2C3650;
+    --bg-img-hero:#FBF9F4;
+    --color-letter:#8B2034;
+}
+
+
+/* Common */
+.container {
+    width: 1440px;
+    margin: 0 auto;
+}
+
+button, a {
+    outline: none;
+}

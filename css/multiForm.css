@@ -1,0 +1,350 @@
+/* Multi Step Form */
+
+.multi_form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* 👈 Nền mờ */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.multi_form_wrapper {
+    position: relative;
+    background: #e6f4ea; /* Xanh mint nhạt */
+    border: 1px solid #cce3d5;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    padding: 24px;
+    backdrop-filter: blur(6px);
+    transition: all 0.3s ease;
+    color: #2c3650;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.multi_form.active_multiForm {
+    display: flex;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+}
+
+.pagination .number {
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    line-height: 28px;
+    border-radius: 50%;
+    background: #ddd; /* Mặc định là xám */
+    color: #666;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.pagination .number:hover {
+    background: #bbb;
+    transform: scale(1.05);
+}
+
+.pagination .number.active {
+    background: #2e7d4f; /* Màu xanh cho step hiện tại */
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(46, 125, 79, 0.3);
+    transform: scale(1.1);
+}
+
+.pagination .bar {
+    width: 40px;
+    height: 4px;
+    background: #ddd; /* Mặc định là xám */
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.pagination .bar.active {
+    background: #2e7d4f; /* Màu xanh cho bar đã hoàn thành */
+    box-shadow: 0 1px 4px rgba(46, 125, 79, 0.3);
+}
+
+.multi_form_wrapper .multi_form_steps {
+    width: 100%;
+    position: relative;
+}
+.multi_form_header p {
+    font-family: "PlayfairDisplay", serif !important;
+    font-size: 1.5em;
+    color: #923a4f;
+    margin: 20px 0 10px;
+    width: 370px;
+    text-align: center;
+    line-height: 1.2;
+}
+.multi_form_steps .step {
+    display: none;
+    flex-direction: column;
+    padding: 5px 15px;
+}
+.multi_form_steps .step h4 {
+    width: 100%;
+    text-align: center;
+    font-family: "PlayfairDisplay", serif !important;
+    font-size: 3rem;
+    color: var(--txt-content);
+}
+
+/* Form thông tin cá nhân */
+.multi_form_inputbox {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.multi_form_inputbox label {
+    margin-bottom: 8px;
+    color: #162938;
+}
+
+.multi_form_inputbox input {
+    background: transparent;
+    border: 2px solid #1e6b41;
+    border-radius: 10px;
+    padding: 8px;
+    font-size: 18px;
+    outline: none;
+}
+
+.multi_form_radio {
+    text-align: left;
+    padding: 0 20px 20px 0;
+}
+.multi_form_radio input {
+    margin: 20px 10px 0 0;
+    transform: scale(1.5);
+}
+.multi_form_radio label {
+    margin-right: 60px;
+}
+
+/* Luyen tap */
+.form-section-activity {
+    border-bottom: 1px solid #eee;
+}
+.form-section-activity h2 {
+    margin-bottom: 8px;
+}
+.form-section-activity:last-child {
+    border-bottom: none;
+}
+
+select#activityLevel {
+    width: 100%;
+    padding: 10px 15px;
+    color: #333;
+    background-color: transparent;
+    font-size: 18px;
+    cursor: pointer;
+    outline: none;
+    border: 2px solid #1e6b41;
+    border-radius: 10px;
+}
+
+
+/* Form mục tiêu */
+.multi_form_steps_grid {
+    margin: 35px 35px 20px;
+    display: grid;
+    row-gap: 20px;
+    column-gap: 50px;
+}
+
+.multi_form_steps_grid.one .checkbox {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.multi_form_steps_grid .checkbox input {
+    display: none;
+}
+
+.multi_form_steps_grid .checkbox label {
+    display: block;
+    width: 220px;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.multi_form_steps_grid .checkbox input:checked + label {
+    background: #1e6b41;
+    color: #fff;
+}
+
+/* Form chế độ ăn */
+.multi_form_img {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 24px 18px 0;
+    column-gap: 25px;
+    row-gap: 20px;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form_img_box {
+    border: 2.5px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.multi_form_img .form_img_box img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    display: block;
+}
+
+.multi_form_img .form_img_box p {
+    text-align: center;
+    padding: 15px 10px;
+    background: #fff;
+    color: var(--txt-content);
+}
+
+.form_img_box.selected {
+    border: 2.5px solid #1e6b41 !important; /* Xanh đậm, border dày hơn */
+    transition: all 0.5s linear;
+}
+.form_img_box.selected p {
+    opacity: 0.9;
+    color: #1e6b41;
+}
+
+/* From di ung */
+.multi_form_steps_grid.two {
+    grid-template-columns: repeat(2, 2fr);
+    width: 30em;
+}
+
+.diung_content img {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+.multi_form_steps_grid
+    .checkbox
+    input[type="checkbox"]:checked
+    + .diung_content {
+    background: #1e6b41;
+    color: #fff;
+}
+
+.checkbox input[type="checkbox"]:checked + .diung_content img {
+    filter: brightness(100%) saturate(100%) contrast(100%) invert(100%)
+        hue-rotate(180deg);
+}
+/*  */
+.multi_form_steps .step.active {
+    display: flex;
+    margin: auto;
+}
+
+.multi_form_footer {
+    padding: 10px 0 20px;
+    display: flex;
+    gap: 60px;
+}
+
+.multi_form_footer button {
+    padding: 5px 10px;
+    font-size: 15px;
+    border: 1px solid #bbb;
+    background: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+.comfimation {
+    text-align: center;
+}
+
+.comfimation h2,
+.comfimation p {
+    margin-bottom: 15px;
+}
+.comfimation button,
+.multi_form_footer button {
+    padding: 12px 28px; /* Tăng padding */
+    border: none;
+    border-radius: 6px; /* Đồng bộ bo góc */
+    font-size: 1em;
+    font-weight: 500; /* Thêm độ đậm */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease,
+        box-shadow 0.3s ease;
+}
+.comfimation button {
+    /* Nút Submit trong bước cuối */
+    background-color: #27ae60;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 20px auto 0 auto;
+    text-align: center;
+}
+.comfimation button:hover {
+    background-color: #219a52;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.multi_form_footer {
+    padding: 20px 30px; /* Tăng padding */
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+}
+.multi_form_footer button.prev {
+    background-color: #7f8c8d; /* Màu xám cho Previous */
+    color: white;
+}
+.multi_form_footer button.prev:hover {
+    background-color: #6c7a7b;
+}
+.multi_form_footer button.next {
+    background-color: #2e7d4f;
+    color: white;
+}
+.multi_form_footer button.next:hover {
+    background-color: #1e6b41;
+}
+.multi_form_footer button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+.multi_form_footer button:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
